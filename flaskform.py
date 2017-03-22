@@ -21,6 +21,13 @@ def info():
 		email = request.form['email']
 		year = request.form['year']
 		return render_template('results.html',first=firstname,last=lastname,gen=gender,inst=interests,dt=bday,mail=email,yr=year)
+
+	"""ANOTHER METHOD TO PASS DATA TO HTML TEMPLATE FROM FORM
+The info() function collects form data present in request.form in a dictionary object (ans)
+and sends it for rendering to result.html.
+
+		ans=request.form
+		return render_template('results.html',res=ans)"""
 	else:
 		firstname = request.args.get('firstname')
 		lastname = request.args.get('lastname')
