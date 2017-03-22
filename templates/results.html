@@ -4,11 +4,28 @@
 	<title>RESULTS</title>
 </head>
 <body>
-Name          : {{last}}&nbsp;{{first}}<br>
+
+Name          : {{last}}&nbsp;{{first}}<br>    <!--Data to html template-->
 Gender        : {{gen}}<br>
 Date of Birth : {{dt}}<br>
 email         : {{mail}}<br>
 Year of Study : {{yr}}<br>
 Interests     : {{inst}}
+	
+<table border="5">                             <!--for loop to access the DICTIONARY res-->
+	{% for key,value in res.iteritems() %} <!--Use of delimiters-->
+	<tr>
+	<th>{{key}}</th>
+	<td>{{value}}</td>
+	</tr>
+	{%endfor%}
+</table>
+
+{% if marks>50 %}                              <!--if statements in HTML, integers comp.  -->                         
+      <h1> Your result is pass!</h1>
+      {% else %}                               <!--Use of delimiters-->
+      <h1>Your result is fail</h1>
+      {% endif %}
+	
 </body>
 </html>
