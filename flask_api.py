@@ -12,10 +12,51 @@ def results():
 	site=request.form['site']
 	user=request.form['user']
 	
-	if site!="Codeforces":
-		return 'API for %s under-construction'%site
+	if site=="Github":
+		gurl='https://api.github.com/users/'+user
+		ginfo=requests.get(gurl)
+		ginfo=ginfo.json()
+		handle=ginfo['login']
+		pic=ginfo['avatar_url']
+		prof=ginfo['html_url']
+		name=ginfo['name']
+		comp=ginfo['company']
+		mail=ginfo['email']
+		bio=ginfo['bio']
+		repo=ginfo['public_repos']
+		fol=ginfo['followers']
 
-	if site=="Codeforces":
+		gurl2='https://api.github.com/users/'+user+'/repos'
+		rinfo=requests.get(gurl2)
+		rinfo=rinfo.json()
+		ll=len(rinfo)
+        i=0
+        reponames=[]
+        stars=[]
+        forks=[]
+        langs=[]
+        while i<ll:
+        	rp=rinfo[i]['name']
+        	st=rinfo[i]['stargazers_count']
+        	fr=rinfo[i]['forks_count']
+        	reponames.append(rp)
+        	stars.append(st)
+        	forks.append(fr)
+        	
+        	langurl='https://api.github.com/repos/'+user+'/'+rp+'/languages'
+        	langinfo=requests.get(langurl)
+        	langinfo=langinfo.json()
+
+        	langstr=""
+        	for key in langinfo.keys():
+        		langstr+=(str(key)+" .  ")
+        	langs.append(langstr)
+        	i+=1
+
+        data=zip(reponames,stars,forks,langs)
+        return render_template('github.html',repodetails=data,user=handle,pic=pic,profile=prof,name=name,org=comp,mail=mail,summary=bio,repo=repo,followers=fol)
+
+	"""if site=="Codeforces":
 		url='http://codeforces.com/api/user.info?handles='+user
 		info=requests.get(url)
 		info=info.json()
@@ -68,7 +109,7 @@ def results():
         			ac+=1
 
 		return render_template('codeforcesres.html',ac=ac,pic=pic,email=email,username=handle,rating=rating,level=level,maxrating=mxrating,maxlevel=mxlevel,country=ct,friends=fr,org=org,contri=contri,contests=contsct)
-
+"""
 if __name__ == '__main__':
 	app.debug = True
 	app.run()
