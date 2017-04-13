@@ -1,6 +1,6 @@
 from flask import * 
 
-app = Flask(__name__)
+app = Flask(__name__)                           #Flask constructor takes the name of current module (__name__) as argument.
 
 #@app.route(' URL ') works over the function written imediately below it 
 
@@ -16,9 +16,9 @@ def adminpage():
 def guestpage(nameofguest):                           #this function accepts value to it's argument from URL
 	return '<b>Welcome to %s page </b>'%nameofguest
 
-"""When a trailing slash (/) is used after an address, it becomes a canonical URL. 
-Hence, using /address or /address/ returns the same output. 
-However, if code does not have trailing slash (/) in address, URL results in 404 Not Found page."""
+                                          #When a trailing slash (/) is used after an address, it becomes a canonical URL. 
+                                          #Hence, using /address or /address/ returns the same output. 
+                         #However, if code does not have trailing slash (/) in address, URL results in 404 Not Found page.
 
 @app.route('/users/<argument>/')                     
 def users(argument):                             
@@ -30,3 +30,6 @@ def users(argument):
 if __name__ == '__main__':
 	app.debug = True                                  #to make changes dynamically in code and see results
 	app.run()
+
+                                                   #debugging mode:The server will then reload itself if the code changes. 
+                                   #It will also provide a useful debugger to track the errors if any, in the application.
