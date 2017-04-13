@@ -1,3 +1,7 @@
+#GET:Sends data in unencrypted form to the server. Most common method.
+
+#POST:Used to send HTML form data to server. Data received by POST method is not cached by server.
+
 from flask import *
 
 app=Flask(__name__)
@@ -22,12 +26,12 @@ def info():
 		year = request.form['year']
 		return render_template('results.html',first=firstname,last=lastname,gen=gender,inst=interests,dt=bday,mail=email,yr=year)
 
-	"""ANOTHER METHOD TO PASS DATA TO HTML TEMPLATE FROM FORM
-The info() function collects form data present in request.form in a dictionary object (ans)
-and sends it for rendering to result.html.
+	                      #ANOTHER METHOD TO PASS DATA TO HTML TEMPLATE FROM FORM
+                              #The info() function collects form data present in request.form in a dictionary object (ans)
+                              #and sends it for rendering to result.html.
 
-		ans=request.form
-		return render_template('results.html',res=ans)"""
+		              #ans=request.form
+		              #return render_template('results.html',res=ans)
 	else:
 		firstname = request.args.get('firstname')
 		lastname = request.args.get('lastname')
