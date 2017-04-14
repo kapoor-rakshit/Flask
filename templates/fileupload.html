@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Upload</title>
+</head>
+<body>
+
+<!--The enctype attribute specifies how the form-data should be encoded when submitting it to the server.
+
+Note: The enctype attribute can be used only if method="post".
+
+ATTRIBUTE VALUES
+application/x-www-form-urlencoded : Default. All characters are encoded before sent (spaces are converted to "+" symbols, and special characters are converted to ASCII HEX values)
+
+multipart/form-data : No characters are encoded. This value is required when you are using forms that have a file upload control
+
+text/plain : Spaces are converted to "+" symbols, but no special characters are encoded-->
+
+<form action="http://127.0.0.1:5000/results" method="post" enctype="multipart/form-data" target="_blank">
+	<input type="file" name="file"><br><br>
+	<input type="submit" name="sbutton" value="SUBMIT">
+</form>
+</body>
+</html>
