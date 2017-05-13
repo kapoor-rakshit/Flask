@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" href="{{url_for('static', filename='forces.png')}}" type="image/png">
+<!--Add image in title bar-->
+
+	<title>login</title>
+</head>
+<body>
+
+<!--In order to remove message from session, template calls get_flashed_messages().
+
+get_flashed_messages(with_categories, category_filter)
+Both parameters are optional. 
+The first parameter is a tuple if received messages are having category. 
+The second parameter is useful to display only specific messages.-->
+
+{% with messages = get_flashed_messages() %}
+         {% if messages %}
+            <ul>
+               {% for message in messages %}
+               <li>{{ message }}</li>
+               {% endfor %}
+            </ul>
+         {% endif %}
+      {% endwith %}
+
+<form action="http://localhost:5000/check/" method="post">
+<dl>                                                                    <!--Description list-->
+<dt>Username</dt>                                                       <!--Description item-->
+<dd><input type="text" name="user" placeholder="username"></dd>         <!--Describe item-->
+	
+<dt>Password</dt>
+<dd><input type="password" name="pass" placeholder="password"></dd>
+<br>
+<input type="submit" name="subb" value="SUBMIT">
+</dl>
+<br><br>
+
+Do you want to <a href = "{{url_for('home')}}"><b>SignIn</b>
+
+</form>
+</body>
+</html>
