@@ -9,16 +9,16 @@
 	<fieldset>
 		<legend>INFORMATION</legend>
 		<div><br>First Name&ensp;               
-		<input type="text" name="firstname" placeholder="Enter firstname">
+		<input type="text" name="firstname" placeholder="Enter firstname" required>
 		&emsp;
 		   Last Name&nbsp;
-		<input type="text" name="lastname" placeholder="Enter lastname">
+		<input type="text" name="lastname" placeholder="Enter lastname" required>
 		</div>
 		<br>
 
 		Gender
-		<br><input type="radio" name="gender" value="male">Male
-		<br><input type="radio" name="gender" value="female">Female
+		<br><input type="radio" name="gender" value="male" required>Male
+		<br><input type="radio" name="gender" value="female" required>Female
 		<br><br>
 
 		<!--Multiple values are separated by commas-->
@@ -30,11 +30,11 @@
         <br><br>
 
 		Date of Birth<br>
-		<input type="date" name="bday" min="1993-01-01" max="2000-12-31">
+		<input type="date" name="bday" min="1993-01-01" max="2000-12-31" required>
 		<br><br>
 
         email<br>
-        <input type="email" name="email">
+        <input type="email" name="email" required>
         <br><br>
 
         B.Tech year<br>
