@@ -42,11 +42,16 @@ from flask import *
 from werkzeug import secure_filename
 from flask import send_from_directory
 
+ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 UPLOAD_FOLDER="C:/Users/R6000670/Documents/Neo4j/pracneo/data/csv/"
 
 app=Flask(__name__)
 app.secret_key = 'random string'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+def allowed_files(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @app.route('/')
 def home():
@@ -59,20 +64,24 @@ def results():
 		flash("No file was selected !!")
 		flash("Choose your file again")
 		return redirect(url_for("home"))
+	elif not allowed_files(file.filename):
+		flash("Invalid file !!")
+		flash("Choose your file again")
+		return redirect(url_for("home"))
 	else:
 		securedfile=secure_filename(file.filename)
 
 		if not os.path.exists(UPLOAD_FOLDER):
 			os.makedirs(UPLOAD_FOLDER)
-			
+
 		file.save(os.path.join(app.config['UPLOAD_FOLDER'], securedfile))
 
 		ctype=file.content_type
 
-		#return render_template('resultspage.html',contenttype=ctype)             #this will show....as you say
+		#return render_template('resultspage.html',contenttype=ctype)
 		return redirect(url_for("uploaded",securedfile=securedfile))
 
-@app.route('/uploads/<securedfile>')                                                      #this will show the file OR will download it
+@app.route('/uploads/<securedfile>')
 def uploaded(securedfile):
 	return send_from_directory(app.config['UPLOAD_FOLDER'],securedfile)
 
