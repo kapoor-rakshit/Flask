@@ -33,3 +33,51 @@ def results():
 if __name__ == '__main__':
 	app.debug=True
 	app.run()
+
+	
+#To upload file to a folder (whether present or not in PC)
+
+import os
+from flask import *
+from werkzeug import secure_filename
+from flask import send_from_directory
+
+UPLOAD_FOLDER="C:/Users/R6000670/Documents/Neo4j/pracneo/data/csv/"
+
+app=Flask(__name__)
+app.secret_key = 'random string'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+@app.route('/')
+def home():
+    return render_template('homepage.html')
+
+@app.route('/results/',methods=['post'])
+def results():
+	file=request.files['file']
+	if file.filename=='':
+		flash("No file was selected !!")
+		flash("Choose your file again")
+		return redirect(url_for("home"))
+	else:
+		securedfile=secure_filename(file.filename)
+
+		if not os.path.exists(UPLOAD_FOLDER):
+			os.makedirs(UPLOAD_FOLDER)
+			
+		file.save(os.path.join(app.config['UPLOAD_FOLDER'], securedfile))
+
+		ctype=file.content_type
+
+		#return render_template('resultspage.html',contenttype=ctype)             #this will show....as you say
+		return redirect(url_for("uploaded",securedfile=securedfile))
+
+@app.route('/uploads/<securedfile>')                                                      #this will show the file OR will download it
+def uploaded(securedfile):
+	return send_from_directory(app.config['UPLOAD_FOLDER'],securedfile)
+
+if __name__=='__main__':
+    app.debug=True
+    app.run()
+	
+	
