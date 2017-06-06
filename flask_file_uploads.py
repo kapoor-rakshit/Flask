@@ -78,10 +78,10 @@ def results():
 
 		ctype=file.content_type
 
-		#return render_template('resultspage.html',contenttype=ctype)
+		#return render_template('resultspage.html',contenttype=ctype)                #this will show as you say.....
 		return redirect(url_for("uploaded",securedfile=securedfile))
 
-@app.route('/uploads/<securedfile>')
+@app.route('/uploads/<securedfile>')                                            #this will display file on this address OR will download it 
 def uploaded(securedfile):
 	return send_from_directory(app.config['UPLOAD_FOLDER'],securedfile)
 
