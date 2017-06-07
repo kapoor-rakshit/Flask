@@ -35,6 +35,6 @@ if __name__ == '__main__':
 	app.debug = True                                  # to make changes dynamically in code and see results
 	app.run(host=None,port=None)                      # takes default 127.0.0.1:5000
 	
-""" To make app run on different port specify app.run(host="0.0.0.0",port=<anyvalue>)"""   
-# host depends on server and port depends on user port = <any value>
+""" To make app run on different port specify : app.run(host="0.0.0.0", port=<anyvalue>)"""   
+""" host depends on server and port depends on user = <anyvalue from 0 to 65535>"""
 
