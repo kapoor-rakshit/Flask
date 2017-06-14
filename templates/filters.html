@@ -1,0 +1,58 @@
+<!--SOURCE : http://jinja.pocoo.org/docs/2.9/
+             https://www.webforefront.com/django/usebuiltinjinjafilters.html-->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Filters</title>
+</head>
+<body>
+                                          {# ----your comments here---- #}
+{%for i in l%}
+{%if i is even%}                         {# test "even" is applied here #}
+{{i}}<br>                                   
+{%endif%}                                {# {{variable | abs}} gives absolute values #}
+{%endfor%}
+                                         {# The |batch(5,'_-') filter returns a list of lists for all variables.Size is 5 and empty cell filled with('_-'anyfillervalue)Output here : ['k', 'a', 'p', 'o', 'o'] ['r', '_-', '_-', '_-', '_-']  #} 
+{%for i in k%}                           
+{%for j in i | batch(5,'_-')%}
+{{j}}<br>
+{%endfor%}
+{%endfor%}
+                                         {# |capitalize   The first CHARACTER will be uppercase,all others lowercase. #}
+                                         {# |lower   Convert a value to lowercase.#}
+                                         {# |upper   Convert a value to uppercase.#}
+                                         {# |title   EACH WORD will start with uppercase letters, all remaining characters are lowercase#}
+
+
+{{ll|default('not defined',true)}}<br>   {# If the value is undefined it will return the passed default value OR true/false in case of boolean #}
+{{ll|d('not defined')}}                  {# var|d is same as |default('') #}
+
+                                         {# var|dictsort(case_sensitivity(false), by('key'))           var|dictsort(True/False, 'key'/'value') #}
+                                         {#    |sort(reverse(false), case_sensitivity(false))                                                  #}
+
+
+                                         {# var|forceescape       Convert the characters &, <, >, ‘, and ” in string s to HTML-safe sequences. Use this if you need to display text that might contain such characters in HTML. #}
+
+                                         {# |first   Return the first item of a sequence. #}
+                                         {# |last    Return the last item of a sequence. #}
+
+                                         {# |length  Return the number of items/characters of a sequence or mapping. #}
+                                         {# |count   same as |length #}
+                                         {# |wordcount  Count the WORDS in that string. #}
+
+                                         {# |list    Convert the value into a list #}
+
+                                         {# |random  Return a random item from the sequence. #}
+
+                                         {# |reject("test here")test can be "odd" Rejecting the objects with the test succeeding from a sequence#}
+                                         {# |select("test here")                  Selecting the objects with the test succeeding.#}
+
+                                         {# |replace("old","new",count)    count value will replace first count occ. only#}
+
+                                         {# |reverse #}
+{{kk|wordcount}}
+
+{#jinja tests are applied using - is (your test here) #}
+</body>
+</html>
