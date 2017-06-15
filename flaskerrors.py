@@ -12,6 +12,17 @@ def check():
 		return "Login Successful"
 	else:
 		return redirect(url_for('home'))                              #redirect to login page 
+	
+	"""-------------ANOTHER WAY ROUND using try except-----------------------"""
+	
+@app.route('/check/',methods=["post"])
+def check():
+	try:
+		#your code here
+		return render_template("success.html")
+	except Exception as e:
+		return render_template("error.html", error=str(e))
+		
 
 #Flask.redirect(location, statuscode, response)
 #In the above function
@@ -30,7 +41,7 @@ def check():
 #HTTP_306_RESERVED
 #HTTP_307_TEMPORARY_REDIRECT
 
-		#abort(401)                                                   #abort on call  
+		'''abort(401)'''                                                   #abort on call  
 
 #Flask.abort(code)
 #The Code parameter takes one of following values
@@ -42,6 +53,10 @@ def check():
 #406  for Not Acceptable
 #415  for Unsupported Media Type
 #429  Too Many Requests"""
+
+@app.errorhandler(404):
+def page_error(e):
+	return render_template("error.html")
 
 if __name__=='__main__':
 	app.debug=True
