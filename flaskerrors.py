@@ -54,7 +54,7 @@ def check():
 #415  for Unsupported Media Type
 #429  Too Many Requests"""
 
-@app.errorhandler(404):
+@app.errorhandler(404)
 def page_error(e):
 	return render_template("error.html")
 
