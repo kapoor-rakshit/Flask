@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Home</title>
+<style>
+		table, th , td  {                                              /* NICE TABLE Style */
+  border: 1px solid grey;
+  border-collapse: collapse;
+  padding: 5px;
+}
+table tr:nth-child(odd) {                                       /*CSS Considers 1 based index*/
+  background-color: #f1f1f1;
+}
+table tr:nth-child(even) {
+  background-color: #ffffff;
+}
+	</style>
+</head>
+<body>
+
+{% with messages = get_flashed_messages() %}
+         {% if messages %}
+            <ul>
+            <li><b>Attention !!</b></li>
+               {% for message in messages %}
+               <li>{{ message }}</li>
+               {% endfor %}
+            </ul>
+         {% endif %}
+      {% endwith %}
+
+<form action="http://127.0.0.1:5000/rec/" method="post">
+	<input type="text" name="roll" placeholder="Roll No.">
+	<input type="text" name="name" placeholder="Name"><br><br>
+	<input type="submit" name="rbt" value="RECORD">
+
+	<input type="submit" name="dbt" formaction="{{url_for('deletefunc')}}" value="Delete">
+</form>
+<br><br>
+<table>
+	{% for row in res %}
+	<tr>
+		<td>{{row.roll}}</td>
+		<td>{{row.name}}</td>
+	</tr>
+	{% endfor %}
+</table>
+
+</body>
+</html>

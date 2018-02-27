@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Home</title>
+</head>
+<body>
+
+	{% with messages = get_flashed_messages() %}
+         {% if messages %}
+            <ul>
+            <li><b>Attention !!</b></li>
+               {% for message in messages %}
+               <li>{{ message }}</li>
+               {% endfor %}
+            </ul>
+         {% endif %}
+      {% endwith %}
+
+<form action="http://127.0.0.1:5000/rec/" method="post">
+	<input type="text" name="name" placeholder="Name"><br><br>
+	<input type="text" name="roll" placeholder="Roll No."><br><br><br>
+	<input type="submit" name="rbt" value="RECORD">
+
+	<input type="submit" name="shbt" formaction="http://127.0.0.1:5000/result/" value="Show DB">
+</form>
+
+</body>
+</html>
