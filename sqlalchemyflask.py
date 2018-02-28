@@ -50,7 +50,15 @@ def deletefunc():
 	flash("Deleted")
 	return redirect(url_for("home"))
 
+@app.route("/upd/",methods=["post"])
+def updatefunc():
+	studinstance = stud.query.get(4084)        # get record by primary_key
+	studinstance.name = "tak"                  # upadte column
+	db.session.commit()
+	flash("Updated")
+	return redirect(url_for("home"))
+
 if __name__ == '__main__':
-	db.create_all()
+	db.create_all()                            # To create/use database mentioned in URI, run the create_all() method.
 	app.debug = True
 	app.run()
